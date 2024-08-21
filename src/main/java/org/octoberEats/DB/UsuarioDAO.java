@@ -1,7 +1,11 @@
 package org.octoberEats.DB;
 
+import org.octoberEats.Modelos.ItemMenu;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO {
     ResultSet resultado = null;
@@ -11,20 +15,27 @@ public class UsuarioDAO {
         this.connectionDB = connectionDB;
     }
 
-    public String insertarUsuario(String nombre, String password){
-        try{
-            connectionDB.setConexion();
-            connectionDB.setConsulta("Insert into users(nombre, password) values(?,?)");
-            connectionDB.getConsulta().setString(1, nombre);
-            connectionDB.getConsulta().setString(2, password);
+    public List<ItemMenu> getItemMenu(int idMenu) {
+        List<ItemMenu> menus = new ArrayList<>();
+        try {
+            conexcionDB.setConexion();
+            conexcionDB.setConsulta("SELECT * FROM itemsmenu WHERE idMenu = ?");
+            conexcionDB.getConsulta().setInt(1, idMenu);
+            resultado = conexcionDB.getResultado();
 
-            return connectionDB.getConsulta().executeUpdate() > 0 ? "Nuevo usuario registrado":"Error en el rgistro!";
-        }catch (SQLException e){
+            while (resultado.next()) {
+                int idItem = resultado.getInt("idItem");
+                String nombre = resultado.getString("nombre");
+                double precio = resultado.getDouble("precio");
+                String descripcion = resultado.getString("descripcion");
+                menus.add(new ItemMenu(idItem,nombre, precio, descripcion, idMenu));
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            connectionDB.cerrarConexion();
+        } finally {
+            conexcionDB.cerrarConexion();
         }
-        return null;
+        return menus;
     }
 
 
