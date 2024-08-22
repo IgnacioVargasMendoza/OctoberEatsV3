@@ -4,20 +4,28 @@ import org.octoberEats.DB.ConexcionDB;
 import org.octoberEats.DB.UsuarioDAO;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OctoverEats extends JFrame{
+public class VentanaRegistro extends JFrame{
 
     private JPanel mainPanel;
     private JLabel JLabelUserName;
     private JTextField userNameField;
     private JLabel JLabelPassword;
-    private JPasswordField PasswordField;
+    private JPasswordField passwordField;
     private JButton btnRegistrar;
+    private JButton btnVolver;
+    private JTextField direccionTxtField;
+    private JLabel jlabelDireccion;
+    private JTextField emailTxtField;
+    private JLabel jlabelEmail;
+    ConexcionDB conexcionDB = new ConexcionDB();
+    UsuarioDAO usuarioDAO = new UsuarioDAO(conexcionDB);
 
-    public OctoverEats() {
+    public VentanaRegistro() {
 
         setContentPane(mainPanel);
         setTitle("Octover Eats - Registro");
@@ -26,18 +34,22 @@ public class OctoverEats extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
 
-        ConexcionDB conexcionDB = new ConexcionDB();
+
+        userNameField.setBorder(new MatteBorder(0, 0,1,0, Color.LIGHT_GRAY));
+        passwordField.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+        direccionTxtField.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+        emailTxtField.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
 
 
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = userNameField.getText();
-                char[] passwordChars = PasswordField.getPassword();
+                char[] passwordChars = passwordField.getPassword();
                 String password = new String(passwordChars);
-
-                UsuarioDAO usuarioDAO = new UsuarioDAO(conexcionDB);
-                String mensaje = usuarioDAO.insertarUsuario(nombre, password);
+                String dir = direccionTxtField.getText();
+                String email = emailTxtField.getText();
+                String mensaje = usuarioDAO.insertarUsuario(nombre,email,password,dir);
                 JOptionPane.showMessageDialog(null, mensaje);
 
                 /*
@@ -47,10 +59,9 @@ public class OctoverEats extends JFrame{
 
                 if(mensaje != null){
                     new ListaRestaurantes();
-                } else {
-
+                    setVisible(false);
                 }
-                setVisible(false);
+
 
             }
         });

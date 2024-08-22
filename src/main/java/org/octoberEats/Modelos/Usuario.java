@@ -8,14 +8,7 @@ public class Usuario {
     private String contrasena;
     private String direccion;
 
-    public Usuario(int idUsuario, String nombre, String email, String contrasena, String direccion) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.email = email;
-        this.contrasena = contrasena;
-        this.direccion = direccion;
-    }
-
+    public Usuario(){}
 
 
     public int getIdUsuario() {

@@ -1,6 +1,7 @@
 package org.octoberEats.DB;
 
 import org.octoberEats.Modelos.ItemMenu;
+import org.octoberEats.Modelos.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,33 +10,60 @@ import java.util.List;
 
 public class UsuarioDAO {
     ResultSet resultado = null;
-    private ConexcionDB connectionDB;
+    private ConexcionDB conexcionDB;
 
     public UsuarioDAO(ConexcionDB connectionDB) {
-        this.connectionDB = connectionDB;
+        this.conexcionDB = connectionDB;
     }
 
-    public List<ItemMenu> getItemMenu(int idMenu) {
-        List<ItemMenu> menus = new ArrayList<>();
-        try {
+    public String insertarUsuario(String nom, String email, String cont, String dir)
+    {
+        try
+        {
             conexcionDB.setConexion();
-            conexcionDB.setConsulta("SELECT * FROM itemsmenu WHERE idMenu = ?");
-            conexcionDB.getConsulta().setInt(1, idMenu);
-            resultado = conexcionDB.getResultado();
+            conexcionDB.setConsulta("Insert into usuarios(nombre, email, password, direccion) values(?,?,?,?)");
+            conexcionDB.getConsulta().setString(1, nom);
+            conexcionDB.getConsulta().setString(2, email);
+            conexcionDB.getConsulta().setString(3, cont);
+            conexcionDB.getConsulta().setString(4, dir);
 
-            while (resultado.next()) {
-                int idItem = resultado.getInt("idItem");
-                String nombre = resultado.getString("nombre");
-                double precio = resultado.getDouble("precio");
-                String descripcion = resultado.getString("descripcion");
-                menus.add(new ItemMenu(idItem,nombre, precio, descripcion, idMenu));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            conexcionDB.cerrarConexion();
+            return conexcionDB.getConsulta().executeUpdate() > 0 ? "Nuevo Usuario registrado":"Error en el rgistro!";
         }
-        return menus;
+        catch(SQLException error)
+        {
+            error.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public Usuario consultarPorNombre(String nom)
+    {
+        try
+        {
+            conexcionDB.setConexion();
+            conexcionDB.setConsulta(String.format("SELECT idUsuario, nombre, email, direccion, contraseña FROM usuarios WHERE nombre = '%s'",nom));
+            resultado = conexcionDB.getResultado();
+            Usuario usuario = new Usuario();
+            while(resultado.next())
+            {
+                usuario.setIdUsuario(resultado.getInt("idUsuario"));
+                usuario.setNombre(resultado.getString("nombre"));
+                usuario.setDireccion(resultado.getString("direccion"));
+                usuario.setEmail(resultado.getString("email"));
+                usuario.setContrasena(resultado.getString("contraseña"));
+            }
+
+            conexcionDB.cerrarConexion();
+
+            return usuario;
+        }
+        catch(SQLException error)
+        {
+            error.printStackTrace();
+        }
+
+        return null;
     }
 
 

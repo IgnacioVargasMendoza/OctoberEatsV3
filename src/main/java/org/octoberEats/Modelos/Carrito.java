@@ -22,4 +22,12 @@ public class Carrito {
     public void vaciarCarrito() {
         itemMenus.clear();
     }
+
+    public double calcularTotal() {
+        double total = 0;
+        for (ItemMenu item : itemMenus) {
+            total += item.getPrecio();
+        }
+        return total;
+    }
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.octoberEats.UI.VentanaItemsMenu">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="223" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-1"/>
+      <preferredSize width="320" height="568"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="4fbcc" class="javax.swing.JList" binding="listaItemsMenu">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="1dc24" class="javax.swing.JButton" binding="agregarItemsbtn">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14145496"/>
+          <font name="Roboto Thin" size="16"/>
+          <foreground color="-1"/>
+          <text value="Agregar Items al Carrito"/>
+        </properties>
+      </component>
+      <component id="a7e1d" class="javax.swing.JButton" binding="verCarritobtn">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14145496"/>
+          <font name="Roboto Thin" size="16"/>
+          <foreground color="-1"/>
+          <text value="Ver Carrito"/>
+        </properties>
+      </component>
+      <component id="c384f" class="javax.swing.JComboBox" binding="comboBoxMenus">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2500135"/>
+          <font name="Yu Gothic UI Light" size="11"/>
+          <foreground color="-1"/>
+          <name value=""/>
+        </properties>
+      </component>
+      <component id="6b371" class="javax.swing.JLabel" binding="labelNombreRestaurante">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Yu Gothic UI Light" size="16"/>
+          <foreground color="-14145496"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="96cfd" class="javax.swing.JButton" binding="volverbtn">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14145496"/>
+          <font name="Roboto Thin" size="16"/>
+          <foreground color="-1"/>
+          <label value="Volver"/>
+          <text value="Volver"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

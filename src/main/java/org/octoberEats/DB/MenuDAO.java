@@ -12,6 +12,9 @@ public class MenuDAO {
     ConexcionDB conexcionDB;
     ResultSet resultado;
 
+    public MenuDAO(ConexcionDB conexcionDB) {
+        this.conexcionDB = conexcionDB;
+    }
     /*
     * Metodo para obtener todos los datos de la tabla menu relacionada con la tabla restaurante
     * Establece la conexion con la base de datos, y el resultado lo devuelvo en una lista con

@@ -12,6 +12,9 @@ public class ItemMenuDAO {
     ConexcionDB conexcionDB;
     ResultSet resultado;
 
+    public ItemMenuDAO(ConexcionDB conexcionDB) {
+        this.conexcionDB = conexcionDB;
+    }
     /*
      * Metodo para obtener todos los datos de la tabla itemmenu relacionada con la tabla menu
      * Establece la conexion con la base de datos, y el resultado lo devuelvo en una lista con

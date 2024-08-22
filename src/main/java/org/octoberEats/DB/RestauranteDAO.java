@@ -11,11 +11,11 @@ import java.util.List;
 public class RestauranteDAO {
 
     ResultSet resultado = null;
-    private ConexcionDB connectionDB;
+    private ConexcionDB conexcionDB;
 
     //Constructor
     public RestauranteDAO(ConexcionDB connectionDB) {
-        this.connectionDB = connectionDB;
+        this.conexcionDB = connectionDB;
     }
 
     //Consulta los restaurante de la base Datos
@@ -23,9 +23,9 @@ public class RestauranteDAO {
     public List<Restaurante> consultarRestaurantes() {
         List<Restaurante> restaurantes = new ArrayList<>();
         try {
-            connectionDB.setConexion();
-            connectionDB.setConsulta("SELECT * FROM restaurantes");
-            resultado = connectionDB.getResultado();
+            conexcionDB.setConexion();
+            conexcionDB.setConsulta("SELECT * FROM restaurantes");
+            resultado = conexcionDB.getResultado();
 
             while (resultado.next()) {
                 int idRestaurant = resultado.getInt("idRestaurant");
@@ -36,7 +36,7 @@ public class RestauranteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            connectionDB.cerrarConexion();
+            conexcionDB.cerrarConexion();
         }
         return restaurantes;
     }
@@ -44,11 +44,11 @@ public class RestauranteDAO {
     public Restaurante consultarRestaurantePorNombre(String nombreRestaurante) {
         Restaurante restaurante = null;
         try {
-            connectionDB.setConexion();
-            connectionDB.setConsulta("SELECT idRestaurante, nombre, direccion FROM restaurantes \n" +
+            conexcionDB.setConexion();
+            conexcionDB.setConsulta("SELECT idRestaurante, nombre, direccion FROM restaurantes \n" +
                     "WHERE nombre = ?");
-            connectionDB.getConsulta().setString(1, nombreRestaurante);
-            resultado = connectionDB.getResultado();
+            conexcionDB.getConsulta().setString(1, nombreRestaurante);
+            resultado = conexcionDB.getResultado();
 
             if (resultado.next()) {// en caso de que solo devuelva un resgistro, esta logica solo fuciona en caso de que la base de datos no tenga valores duplicados en la columna nombre
                 int idRestaurante = resultado.getInt("idRestaurante");
@@ -60,7 +60,7 @@ public class RestauranteDAO {
         } catch (SQLException e) {
             System.err.println("Error al consultar el restaurante: " + e.getMessage());
         } finally {
-            connectionDB.cerrarConexion();
+            conexcionDB.cerrarConexion();
         }
         return restaurante;
     }
